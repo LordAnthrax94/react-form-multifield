@@ -12,7 +12,7 @@ const [formData, setformData] = useState({
     "contenuto": "",
     "categoria": "",
     "immagini": "",
-    "tags": [],
+    "tags": "",
     "stato": ""  
 })
 
@@ -39,10 +39,10 @@ const [formData, setformData] = useState({
    <main>
     <div className="container">
       <form action="#" onSubmit={handlerSubmit}>
-        <div className="col-12">
+        <div className="col-12 shadow p-2 text-bg-primary">
           <div className="input-group mb-3 mt-5">
             <input name="titolo" type="text" className="form-control" placeholder="Aggiungi nuovo articolo" value={formData.text} onChange={updateTask} />          
-            <button className="btn btn-outline-secondary" type="submit" id="button-addon2">Aggiungi</button>
+            <button className="btn btn-warning" type="submit" id="button-addon2">Aggiungi</button>
           </div>
           
             <div className="mb-3">
@@ -59,13 +59,18 @@ const [formData, setformData] = useState({
        
       <div className="container">
         <div className="col-12">
-          {taskList.map((task) => (<div className="card mt-5" key={task.id}>{task.titolo} <i className="fa-solid fa-trash" onClick={() => handlerRemove(task.id)}></i>
+          {taskList.map((task) => (<div className="card p-2 mt-5 shadow text-bg-success" key={task.id}>
            
-              <img src={task.immagini} className="card-img-top" alt="immagine" />
+              <img src={task.immagini} className="card-img-top mt-2" alt="immagine" />
               <div className="card-body">
-                <h5 className="card-title">{task.titolo}</h5>
+                <h2 className="card-title">{task.titolo} <i className="fa-solid fa-trash" onClick={() => handlerRemove(task.id)}></i></h2>
                 <p className="card-text">{task.contenuto}</p>
-              </div>                        
+              </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item">{task.categoria}</li>
+                  <li class="list-group-item">{task.tags}</li>
+                  <li class="list-group-item">{task.stato}</li>
+                </ul>                        
             
             </div>))}
 

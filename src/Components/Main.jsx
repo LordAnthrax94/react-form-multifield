@@ -29,7 +29,7 @@ const [formData, setformData] = useState({
     let value = e.target.value
     
     if(e.target.name === "categoria"){
-      value = categorie[e.target.name]
+      value = categorie[e.target.value]
       // console.log(categorie);
       console.log("valore categoria: " + value);
       
@@ -84,7 +84,7 @@ const [formData, setformData] = useState({
             <select className="form-select" name="categoria" type="text" value={formData.categoria} onChange={updateTask} >
               <option>Seleziona una categoria</option>
               {categorie.map((categoria, index) =>(
-                <option key={index} value={index}>{categoria}</option>
+                <option name="categoria" key={index} value={index}>{categoria}</option>
               ))}
             </select>
           </div>

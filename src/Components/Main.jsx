@@ -3,6 +3,8 @@ import libri from "./libri";
 
 const listaLibri = libri;
 
+const categorie = ["Tecnologia", "Viaggi", "Salute", "Letteratura", "Storia", "Arte" ]
+
 const Main = ()=>{  
 
 const [taskList, setTaskList] = useState(listaLibri);
@@ -22,9 +24,13 @@ const [formData, setformData] = useState({
   };
 
   const updateTask = (e) =>{
+    let value = e.taget.value;
+    if(e.taget.name === "category"){
+      value = categorie[e.target.name]
+    }
     const articleData = {
       ...formData,
-      [e.target.name]: e.target.value
+      [e.target.name]: value
     };
 
     setformData(articleData);
@@ -37,11 +43,17 @@ const [formData, setformData] = useState({
 
   return (
    <main>
-    <div className="container">
-      <form action="#" onSubmit={handlerSubmit}>
+    <div className="container">      
+      <form action="#" onSubmit={handlerSubmit}>      
         <div className="col-12 shadow p-2 text-bg-primary">
+         <h1>Aggiungi un post</h1>
           <div className="input-group mb-3 mt-5">
-            <input name="titolo" type="text" className="form-control" placeholder="Aggiungi nuovo articolo" value={formData.text} onChange={updateTask} />          
+            <input className="form-control"
+             name="titolo" 
+             type="text" 
+             placeholder="Aggiungi il titolo" 
+             value={formData.text} 
+             onChange={updateTask} />          
             <button className="btn btn-warning" type="submit" id="button-addon2">Aggiungi</button>
           </div>
           
@@ -53,7 +65,15 @@ const [formData, setformData] = useState({
           <div className="mb-3">
             <label hmtlfor="exampleFormControlTextarea1" className="form-label">Inserire contenuto</label>
             <textarea name="contenuto" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>
+          </div>           
+          <div>
+            <select className="form-select" name="categoria" onChange={updateTask} defaultValue="">
+              <option selected>Seleziona una categoria</option>
+              {categorie.map((categoria, index) =>(
+                <option key={index} value={index}>{categoria}</option>
+              ))}
+            </select>
+          </div>                   
         </div>       
       </form>
        
@@ -66,10 +86,10 @@ const [formData, setformData] = useState({
                 <h2 className="card-title">{task.titolo} <i className="fa-solid fa-trash" onClick={() => handlerRemove(task.id)}></i></h2>
                 <p className="card-text">{task.contenuto}</p>
               </div>
-                <ul class="list-group list-group-flush">
-                  <li class="list-group-item">{task.categoria}</li>
-                  <li class="list-group-item">{task.tags}</li>
-                  <li class="list-group-item">{task.stato}</li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item">{task.categoria}</li>
+                  <li className="list-group-item">{task.tags}</li>
+                  <li className="list-group-item">{task.stato}</li>
                 </ul>                        
             
             </div>))}

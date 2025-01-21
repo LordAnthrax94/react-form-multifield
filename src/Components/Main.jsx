@@ -24,10 +24,21 @@ const [formData, setformData] = useState({
   };
 
   const updateTask = (e) =>{
-    let value = e.taget.value;
-    if(e.taget.name === "category"){
+    console.log(e.target.name);
+    
+    let value = e.target.value
+    
+    if(e.target.name === "categoria"){
       value = categorie[e.target.name]
+      // console.log(categorie);
+      console.log("valore categoria: " + value);
+      
+      
+      
+      
     }
+    
+
     if(e.target.type === "checkbox"){
       value = e.target.checked
     }
@@ -55,9 +66,8 @@ const [formData, setformData] = useState({
              name="titolo" 
              type="text" 
              placeholder="Aggiungi il titolo" 
-             value={formData.text} 
-             onChange={updateTask} />          
-            <button className="btn btn-warning" type="submit" id="button-addon2">Aggiungi</button>
+             value={formData.titolo} 
+             onChange={updateTask} />             
           </div>
           
             <div className="mb-3">
@@ -67,10 +77,11 @@ const [formData, setformData] = useState({
 
           <div className="mb-3">
             <label hmtlfor="exampleFormControlTextarea1" className="form-label">Inserire contenuto</label>
-            <textarea name="contenuto" className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-          </div>           
+            <textarea name="contenuto" type="text" value={formData.contenuto} onChange={updateTask} className="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+          </div>  
+                   
           <div>
-            <select className="form-select" name="categoria" onChange={updateTask} defaultValue="">
+            <select className="form-select" name="categoria" type="text" value={formData.categoria} onChange={updateTask} >
               <option>Seleziona una categoria</option>
               {categorie.map((categoria, index) =>(
                 <option key={index} value={index}>{categoria}</option>
@@ -84,8 +95,8 @@ const [formData, setformData] = useState({
               Pubblicato
             </label>
           </div>
-
-        </div>       
+         <button className="btn btn-warning" type="submit" id="button-addon2">Aggiungi</button> 
+        </div>              
       </form>
        
       <div className="container">

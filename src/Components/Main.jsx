@@ -14,8 +14,8 @@ const [formData, setformData] = useState({
     "contenuto": "",
     "categoria": "",
     "immagini": "",
-    "tags": "",
-    "stato": ""  
+    "tags": [],
+    "stato": false 
 })
 
  const handlerSubmit = (e) => {
@@ -27,6 +27,9 @@ const [formData, setformData] = useState({
     let value = e.taget.value;
     if(e.taget.name === "category"){
       value = categorie[e.target.name]
+    }
+    if(e.target.type === "checkbox"){
+      value = e.target.checked
     }
     const articleData = {
       ...formData,
@@ -45,7 +48,7 @@ const [formData, setformData] = useState({
    <main>
     <div className="container">      
       <form action="#" onSubmit={handlerSubmit}>      
-        <div className="col-12 shadow p-2 text-bg-primary">
+        <div className="col-12 shadow p-2 text-bg-secondary">
          <h1>Aggiungi un post</h1>
           <div className="input-group mb-3 mt-5">
             <input className="form-control"
@@ -68,12 +71,20 @@ const [formData, setformData] = useState({
           </div>           
           <div>
             <select className="form-select" name="categoria" onChange={updateTask} defaultValue="">
-              <option selected>Seleziona una categoria</option>
+              <option>Seleziona una categoria</option>
               {categorie.map((categoria, index) =>(
                 <option key={index} value={index}>{categoria}</option>
               ))}
             </select>
-          </div>                   
+          </div>
+
+          <div className="form-check mt-3">
+            <input className="form-check-input" type="checkbox" id="published" name="published" checked={formData.stato} onChange={updateTask}/>
+            <label className="form-check-label" htmlFor="published">
+              Pubblicato
+            </label>
+          </div>
+
         </div>       
       </form>
        
